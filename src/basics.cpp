@@ -1,9 +1,25 @@
 #include "basics.hpp"
 #include "objects.hpp"
+#include <math.h>
+#include <algorithm>    // std::sort
+#include <vector>       // std::vector
+
 using namespace std;
 
 
-void readInstance(const char* nom_fichier, Instance& instance ) { 
+int distance(Case const& c1, Case const& c2){
+
+  return sqrt( (c1.i-c2.i)*(c1.i-c2.i) + (c1.j-c2.j)*(c1.j-c2.j)); 
+
+}
+
+bool compProductWeight (Product i,Product j) { return (i.weight<j.weight); }
+void products_sort(vector<Product>& list_products){
+sort(list_products.begin(), list_products.end(), compProductWeight);
+
+}
+
+void readInstance( char const * nom_fichier, Instance& instance ) { 
 
 
   //char char1;
