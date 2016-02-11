@@ -6,8 +6,17 @@
 #include <fstream>
 #include <vector>
 #include "objects.hpp"
+#include <math.h>
+#include <algorithm>    // std::sort
+#include <vector>       // std::vector
 
 
-void readInstance(const char* nom_fichier,Instance& instance );
+
+int distance(Case const& c1, Case const& c2);
+
+bool compProductWeight (Product i,Product j);
+void products_sort(vector<Product>& list_products);
+
+void readInstance( char const * nom_fichier,Instance& instance );
 
 #endif /*__BASIC_HPP_*/
