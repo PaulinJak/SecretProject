@@ -30,6 +30,7 @@ void initialSend(ofstream& outPut, vector<Case>& drones_positions, vector<int>& 
 
   vector<Case> uniformPositions(instance.n_drones,Case(0,0));
 
+
 for (int drone=0; drone< instance.n_drones ;drone++){
     uniformPositions[drone].i=rand() % instance.n;
     uniformPositions[drone].j=rand() %instance.m;
@@ -37,15 +38,13 @@ for (int drone=0; drone< instance.n_drones ;drone++){
 
 // double area = instance.n*instance.m/instance.n_drones;
 
-
 for (int drone=0; drone< instance.n_drones;drone++){
      
 Warehouse wareh_id_to_send=findNearestWarehouse( uniformPositions[drone],instance);
 
-outPut <<drone <<" L "<< wareh_id_to_send.w<< "0 0\n";
+outPut <<drone <<" L "<< wareh_id_to_send.w<< " 0 0\n";
 
 int distance_to_fly=distance(drones_positions[drone],wareh_id_to_send.position);
-
 drones_positions[drone]=wareh_id_to_send.position;
 
 drones_temps[drone]+=distance_to_fly+1;
