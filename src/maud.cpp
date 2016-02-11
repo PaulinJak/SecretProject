@@ -52,7 +52,7 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
     int score = -1;
     int num_order = 0;
     int num_best_ws = 0;
-    vector<int> best_chargement_drone;
+    vector<int> best_chargement_drone(size);
     int turn = -1;
 
     
@@ -65,26 +65,24 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
         
         
         
-        int i=0;
         // parcours des warehouses
         for( vector<Warehouse>::iterator wr=(instance.warehouses).begin() ; wr < (instance.warehouses).end(); wr++){
             
             int chargement_drone = 0;
-            cout<<i<<"/n"; 
-           i++; 
             dist_d_w = distance(drone_position, wr->position);
             dist_w_o = distance(wr->position, ord->position);
             
             if ((dist_w_o+dist_d_w+2)> delta_temps) {
                 score = -1;
-                break;
+              //  cout <<"distance impossible"<<"\n";
+                continue;
             }
             
             vector<Product> objetsTries(ord->product_type.size(), Product(0,0));
-            int i=0;
+            int ii=0;
             for(vector<int>::iterator elt=ord->product_type.begin(); elt<ord->product_type.end(); elt++){
-                objetsTries[i]=instance.products[*elt];
-                i++;
+                objetsTries[ii]=instance.products[*elt];
+                ii++;
             }
             products_sort(objetsTries);
             
@@ -105,7 +103,7 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
             
             int nb_products = nbobjetsdifferents(stock_fictif_embarque,size);
             
-            double score_f = (double) (chargement_drone)/(dist_d_w+dist_w_o+2*nb_products);
+            double score_f = ((double) (chargement_drone))/((double)(dist_d_w+dist_w_o+2*nb_products));
             
             if (((dist_d_w+dist_w_o+2*nb_products)<= delta_temps)&&(score_f> score)) {
                 score=score_f;
@@ -120,6 +118,7 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
         }
     }
     if (score<0) {
+        cout<<"negatif"<<score<<"\n";
         return -1;
     }
     
@@ -153,7 +152,7 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
     // update case drone
     drone_position = instance.orders[num_order].position;
     // renvoyer temps drone
-    
+    cout<<"pas negatif"<<turn<<"\n";
     return turn;
 
 }

@@ -28,8 +28,11 @@ int main(int argc, char* argv[])
         vector<Case> drone_position(n_drones, Case(0,0));
         //initial
 	
-	initialSend(fichier, drone_position, drone_temps, instance);
+	    initialSend(fichier, drone_position, drone_temps, instance);
+        int tourcpt=0;
         while(drone_actif>0){
+            cout<<"Tour n° "<<tourcpt<<"\n";
+            tourcpt++;
             //On trouve le drone avec le temps le, plus petit
             int drone_id=-1;
             int temps_abs=max_T;
@@ -45,12 +48,13 @@ int main(int argc, char* argv[])
             int deltaT = max_T - temps_abs;
             //on appel la fonction de choix
             deltaT = choix_next_move(instance, deltaT, drone_position[drone_id], drone_id, fichier);
+
             // si deltaT negatif, on retire le drone
             if (deltaT<0){
                 drone_actif--;
                 drone_temps.at(drone_id) = max_T+1;
             } else {
-                drone_temps.at(drone_id) = max_T-deltaT;
+                drone_temps.at(drone_id) += deltaT;
             }
         }
         return 0;
