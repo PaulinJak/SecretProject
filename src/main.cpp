@@ -17,6 +17,8 @@ int main(int argc, char* argv[])
         // Lire et initialiser les données
         Instance instance;
         readInstance("instances/mother_of_all_warehouses.in", instance );
+        ofstream fichier("commands.out");
+
         int max_T = instance.T_horizon;
         int n_drones = instance.n_drones;
         // Tant que des drones ont le tant de faire des commandes
@@ -25,7 +27,8 @@ int main(int argc, char* argv[])
         vector<int>  drone_temps(n_drones);
         vector<Case> drone_position(n_drones, Case(0,0));
         //initial
-
+	
+	initialSend(fichier, drone_position, drone_temps, instance);
         while(drone_actif>0){
             //On trouve le drone avec le temps le, plus petit
             int drone_id=-1;
@@ -41,7 +44,6 @@ int main(int argc, char* argv[])
             //on clacul le temps restant au drone
             int deltaT = max_T - temps_abs;
             //on appel la fonction de choix
-            ofstream fichier("commands.out");
             deltaT = choix_next_move(instance, deltaT, drone_position[drone_id], drone_id, fichier);
             // si deltaT negatif, on retire le drone
             if (deltaT<0){
