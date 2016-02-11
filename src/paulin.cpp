@@ -29,9 +29,11 @@ int newdist=distance(pos,(instance.warehouses[i]).position);
 void initialSend(ofstream& outPut, vector<Case>& drones_positions, vector<int>& drones_temps, Instance& instance){
 
   vector<Case> uniformPositions(instance.n_drones,Case(0,0));
-for (int drone=0; drone< uniformPositions.size() ;drone++){
-uniformPositions[drone].i=rand() % instance.n;
-uniformPositions[drone].j=rand() %instance.m;
+
+
+for (int drone=0; drone< instance.n_drones ;drone++){
+    uniformPositions[drone].i=rand() % instance.n;
+    uniformPositions[drone].j=rand() %instance.m;
 }
 
 // double area = instance.n*instance.m/instance.n_drones;

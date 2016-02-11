@@ -65,12 +65,13 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
         
         
         
-        
+        int i=0;
         // parcours des warehouses
         for( vector<Warehouse>::iterator wr=(instance.warehouses).begin() ; wr < (instance.warehouses).end(); wr++){
             
             int chargement_drone = 0;
-            
+            cout<<i<<"/n"; 
+           i++; 
             dist_d_w = distance(drone_position, wr->position);
             dist_w_o = distance(wr->position, ord->position);
             
@@ -79,7 +80,13 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
                 break;
             }
             
-            vector<Product> objetsTries = product_sort(ord->product_type);
+            vector<Product> objetsTries(ord->product_type.size(), Product(0,0));
+            int i=0;
+            for(vector<int>::iterator elt=ord->product_type.begin(); elt<ord->product_type.end(); elt++){
+                objetsTries[i]=instance.products[*elt];
+                i++;
+            }
+            products_sort(objetsTries);
             
             vector<Product>::iterator obj = objetsTries.begin();
             vector<int> stock_fictif_embarque(size);
@@ -102,7 +109,7 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
             
             if (((dist_d_w+dist_w_o+2*nb_products)<= delta_temps)&&(score_f> score)) {
                 score=score_f;
-                num_best_ws = ws->w;
+                num_best_ws = wr->w;
                 for (int i = 0; i<size; i++) {
                     best_chargement_drone[i] = stock_fictif_embarque[i];
                 }
