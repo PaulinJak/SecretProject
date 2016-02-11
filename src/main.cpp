@@ -5,6 +5,7 @@
 #include "objects.hpp"
 #include "basics.hpp"
 #include "maud.hpp"
+#include "paulin.hpp"
 
 using namespace std;
 
@@ -23,6 +24,7 @@ int main(int argc, char* argv[])
         // Initialise le vecteur temps des drones
         vector<int>  drone_temps(n_drones);
         vector<Case> drone_position(n_drones, Case(0,0));
+        //initial
 
         while(drone_actif>0){
             //On trouve le drone avec le temps le, plus petit
@@ -39,9 +41,8 @@ int main(int argc, char* argv[])
             //on clacul le temps restant au drone
             int deltaT = max_T - temps_abs;
             //on appel la fonction de choix
-            //deltaT = choix_next_move(instance, deltaT, drone_position.at(i),drone_id);
-            //TODO ajouter fstream chez maud
-/*TODO*/    deltaT =-1; //TEST A ENLEVER!!!
+            ostream fichier("commands.out");
+            deltaT = choix_next_move(instance, deltaT, drone_position.at(i), drone_id, fichier);
             // si deltaT negatif, on retire le drone
             if (deltaT<0){
                 drone_actif--;
