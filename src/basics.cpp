@@ -1,5 +1,6 @@
 #include "basics.hpp"
 #include "objects.hpp"
+#include <fstream>
 #include <math.h>
 #include <algorithm>    // std::sort
 #include <vector>       // std::vector
@@ -9,11 +10,11 @@ using namespace std;
 
 int distance(Case const& c1, Case const& c2){
 
-  return sqrt( (c1.i-c2.i)*(c1.i-c2.i) + (c1.j-c2.j)*(c1.j-c2.j)); 
+  return ceil(sqrt( (c1.i-c2.i)*(c1.i-c2.i) + (c1.j-c2.j)*(c1.j-c2.j))); 
 
 }
 
-bool compProductWeight (Product i,Product j) { return (i.weight<j.weight); }
+bool compProductWeight (Product i,Product j) { return (i.weight>j.weight); }
 void products_sort(vector<Product>& list_products){
 sort(list_products.begin(), list_products.end(), compProductWeight);
 
@@ -100,3 +101,10 @@ void readInstance( char const * nom_fichier, Instance& instance ) {
     else cout << "Fichier non trouvé!! \n";
 }
 
+
+void writeOutput(ofstream& outputStream, int const& nb_operations){
+
+  outputStream.seekp(0,ios::beg);
+  outputStream<< nb_operations<<"\n";
+	  
+	}

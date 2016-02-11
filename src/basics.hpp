@@ -19,4 +19,6 @@ void products_sort(vector<Product>& list_products);
 
 void readInstance( char const * nom_fichier,Instance& instance );
 
+void writeOutput(ofstream& outputStream, int const& nb_operations);
+
 #endif /*__BASIC_HPP_*/
