@@ -29,13 +29,13 @@ int nbobjetsdifferents(vector<int>& stock_fictif_embarque, int taille){
 
 void update_orders(Instance& instance, int id, vector<int> &chargement){
     Order o = instance.orders[id];
-    vector<int> new_order();
+    vector<int>  new_order(0);
 
     for(vector<int>::iterator elt=o.product_type.begin(); elt<o.product_type.end(); elt++){
-        if (chargemant[(*elt)]>0){
+        if (chargement[(*elt)]>0){
             chargement[(*elt)]--;
         }else{
-            new_order.push_back((*elt));
+            new_order.push_back(*elt);
         }
     }
     instance.orders[id].product_type = new_order;
@@ -44,7 +44,7 @@ void update_orders(Instance& instance, int id, vector<int> &chargement){
 
 
 
-int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, int drone_number, fstream &fichier ){
+int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, int drone_number, ofstream &fichier ){
     
     int size = instance.products.size();
     
@@ -79,7 +79,7 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
                 break;
             }
             
-            vector<Product> objetsTries = trier_objects(ord->product_type);
+            vector<Product> objetsTries = product_sort(ord->product_type);
             
             vector<Product>::iterator obj = objetsTries.begin();
             vector<int> stock_fictif_embarque(size);

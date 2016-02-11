@@ -41,8 +41,8 @@ int main(int argc, char* argv[])
             //on clacul le temps restant au drone
             int deltaT = max_T - temps_abs;
             //on appel la fonction de choix
-            ostream fichier("commands.out");
-            deltaT = choix_next_move(instance, deltaT, drone_position.at(i), drone_id, fichier);
+            ofstream fichier("commands.out");
+            deltaT = choix_next_move(instance, deltaT, drone_position[drone_id], drone_id, fichier);
             // si deltaT negatif, on retire le drone
             if (deltaT<0){
                 drone_actif--;

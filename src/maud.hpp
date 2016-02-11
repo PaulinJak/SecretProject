@@ -20,6 +20,6 @@
 
 using namespace std;
 
-int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, int drone_number, fstream & fichier);
+int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, int drone_number, ofstream & fichier);
 
 #endif /* fonctions_hpp */
