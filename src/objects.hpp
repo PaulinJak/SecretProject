@@ -41,6 +41,8 @@ public :
 
   class Order{
   public:
+    Order(int& c0, Case& pos, int& n_items):
+      c(c0), position(pos), number_items(n_items), product_type(){};
     int c ; //identity
     Case position;
     int number_items;
