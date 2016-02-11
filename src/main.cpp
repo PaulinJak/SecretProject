@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
             //on clacul le temps restant au drone
             int deltaT = max_T - temps_abs;
             //on appel la fonction de choix
-            //deltaT = choix_next_move(instance, deltaT, drone_position.at(i),drone_id); 
+            //deltaT = choix_next_move(instance, deltaT, drone_position.at(i),drone_id);
             //TODO ajouter fstream chez maud
 /*TODO*/    deltaT =-1; //TEST A ENLEVER!!!
             // si deltaT negatif, on retire le drone
