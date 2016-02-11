@@ -15,14 +15,14 @@ int main(int argc, char* argv[])
 {
         // Lire et initialiser les données
         Instance instance;
-        readInstance("instances/mother_of_all_warehouses.in", instances );
+        readInstance("instances/mother_of_all_warehouses.in", instance );
         int max_T = instance.T_horizon;
 
         // Tant que des drones ont le tant de faire des commandes
         int drone_actif = instance.n_drones;
         // Initialise le vecteur temps des drones
-        vector<int>  drone_temps(instances.n_drones);
-        vector<Case> drone_position(instances.n_drones, Case(0,0));
+        vector<int>  drone_temps(instance.n_drones);
+        vector<Case> drone_position(instance.n_drones, Case(0,0));
 
         while(drone_actif>0){
             //On trouve le drone avec le temps le, plus petit
@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
             int i=0;
             for(int t : drone_temps){
                 if (t<temps_abs){
-                    id=i;
+                    drone_id=i;
                     temps_abs=t;
                 }
                 i++;
