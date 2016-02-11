@@ -68,18 +68,24 @@ LINK     := g++
 all : hashcode
 
 
-hashcode: main.o fonctions.o carre.o
-	$(LINK) $(LDDIRS) -o hashcode main.o fonctions.o carre.o $(LDFLAGS) -lm $(CXXFLAGS) 
+hashcode: main.o basics.o maud.o paulin.o jean.o
+	$(LINK) $(LDDIRS) -o hashcode main.o basics.o maud.o paulin.o jean.o $(LDFLAGS) -lm $(CXXFLAGS) 
 
 
-main.o : src/main.cpp   src/fonctions.cpp src/matrix.hpp
+main.o : src/main.cpp  
 	$(CCXX) $(LDDIRS) src/main.cpp -o main.o  $(LDFLAGS) -lm $(CXXFLAGS) 
 
-fonctions.o : src/fonctions.cpp   
-	$(CCXX) $(LDDIRS) src/fonctions.cpp -o fonctions.o  $(LDFLAGS) -lm $(CXXFLAGS) 
+basics.o : src/basics.cpp   
+	$(CCXX) $(LDDIRS) src/basics.cpp -o basics.o  $(LDFLAGS) -lm $(CXXFLAGS) 
 
-carre.o : src/carre.cpp   
-	$(CCXX) $(LDDIRS) src/carre.cpp -o carre.o  $(LDFLAGS) -lm $(CXXFLAGS)
+maud.o : src/maud.cpp   
+	$(CCXX) $(LDDIRS) src/maud.cpp -o maud.o  $(LDFLAGS) -lm $(CXXFLAGS)
+
+paulin.o : src/paulin.cpp   
+	$(CCXX) $(LDDIRS) src/paulin.cpp -o paulin.o  $(LDFLAGS) -lm $(CXXFLAGS)
+
+jean.o : src/jean.cpp   
+	$(CCXX) $(LDDIRS) src/jean.cpp -o jean.o  $(LDFLAGS) -lm $(CXXFLAGS)
 
 
 clean:
