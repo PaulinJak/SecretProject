@@ -19,5 +19,38 @@ public:
   int j;
 };
 
+class Product{
+public :
+  int p ; //product number
+  int weight ; 
+};
+
+class Warehouse{
+public :
+  int w;
+  Case position;
+  vector<int> available ; //products available
+};
+
+  class Order{
+  public:
+    int c ; //identity
+    Case position;
+    int number_items;
+    vector<int> product_type;
+  };
+class Instance{
+public :
+  int n; //rows
+  int m; //columns
+  int n_drones ;
+  int T_horizon ;
+  int max_load ;
+  
+
+};
+
+
+
 
 #endif
