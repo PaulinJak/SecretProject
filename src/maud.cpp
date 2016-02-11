@@ -65,12 +65,13 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
         
         
         
-        
+        int i=0;
         // parcours des warehouses
         for( vector<Warehouse>::iterator wr=(instance.warehouses).begin() ; wr < (instance.warehouses).end(); wr++){
             
             int chargement_drone = 0;
-            
+            cout<<i<<"/n"; 
+           i++; 
             dist_d_w = distance(drone_position, wr->position);
             dist_w_o = distance(wr->position, ord->position);
             

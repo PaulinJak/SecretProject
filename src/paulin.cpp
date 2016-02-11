@@ -15,7 +15,7 @@ using namespace std;
 Warehouse findNearestWarehouse(Case const& pos,Instance const& instance){
   int bestDistance =distance(pos,(instance.warehouses[0]).position);
    int nearestWarehouseId =0;
-   for(int i=1; i<<instance.warehouses.size(); i++){
+   for(int i=1; i<instance.warehouses.size(); i++){
 int newdist=distance(pos,(instance.warehouses[i]).position);
      if (newdist<bestDistance){
        bestDistance=newdist;
@@ -31,8 +31,8 @@ void initialSend(ofstream& outPut, vector<Case>& drones_positions, vector<int>& 
   vector<Case> uniformPositions(instance.n_drones,Case(0,0));
 
 for (int drone=0; drone< instance.n_drones ;drone++){
-uniformPositions[drone].i=rand() % instance.n;
-uniformPositions[drone].j=rand() %instance.m;
+    uniformPositions[drone].i=rand() % instance.n;
+    uniformPositions[drone].j=rand() %instance.m;
 }
 
 // double area = instance.n*instance.m/instance.n_drones;
