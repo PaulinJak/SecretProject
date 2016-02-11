@@ -42,7 +42,7 @@ for (int drone=0; drone< instance.n_drones;drone++){
      
 Warehouse wareh_id_to_send=findNearestWarehouse( uniformPositions[drone],instance);
 
-outPut <<drone <<" L "<< wareh_id_to_send.w<< "0 0\n";
+outPut <<drone <<" L "<< wareh_id_to_send.w<< " 0 0\n";
 
 int distance_to_fly=distance(drones_positions[drone],wareh_id_to_send.position);
 drones_positions[drone]=wareh_id_to_send.position;
