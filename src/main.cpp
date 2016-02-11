@@ -16,8 +16,8 @@ int main(int argc, char* argv[])
 {
         // Lire et initialiser les données
         Instance instance;
-        readInstance("instances/mother_of_all_warehouses.in", instance );
-        ofstream fichier("commands.out");
+        readInstance("instances/redundancy.in", instance );
+        ofstream fichier("redudancy.out");
 
         int max_T = instance.T_horizon;
         int n_drones = instance.n_drones;
@@ -28,10 +28,10 @@ int main(int argc, char* argv[])
         vector<Case> drone_position(n_drones, Case(0,0));
         //initial
 	
-	    initialSend(fichier, drone_position, drone_temps, instance);
+//	    initialSend(fichier, drone_position, drone_temps, instance);
         int tourcpt=0;
         while(drone_actif>0){
-            cout<<"Tour n° "<<tourcpt<<"\n";
+//            cout<<"Tour n° "<<tourcpt<<"\n";
             tourcpt++;
             //On trouve le drone avec le temps le, plus petit
             int drone_id=-1;

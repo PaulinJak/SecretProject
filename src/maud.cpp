@@ -118,7 +118,7 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
         }
     }
     if (score<0) {
-        cout<<"negatif"<<score<<"\n";
+//        cout<<"negatif"<<score<<"\n";
         return -1;
     }
     
@@ -152,7 +152,7 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
     // update case drone
     drone_position = instance.orders[num_order].position;
     // renvoyer temps drone
-    cout<<"pas negatif"<<turn<<"\n";
+//    cout<<"pas negatif"<<turn<<"\n";
     return turn;
 
 }

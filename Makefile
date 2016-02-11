@@ -51,7 +51,7 @@ OBJ      := $(CXX_OBJ) #$(C_OBJ)
 
 
 CCXX     := g++ -c #compile and assemble but do not link
-CXXFLAGS += -Wall $(CPLEX_CXX_CFLAGS) $(BOOST_FLAG) -g -std=c++11 #-DNVERBOSE
+CXXFLAGS += -march=native -O3 -Wall $(CPLEX_CXX_CFLAGS) $(BOOST_FLAG) -g -std=c++11 #-DNVERBOSE
 LDFLAGS  += $(CPLEX_CXX_LDFLAGS) -g
 
 
