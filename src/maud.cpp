@@ -27,13 +27,27 @@ int nbobjetsdifferents(vector<int>& stock_fictif_embarque, int taille){
     return cpt;
 }
 
+void update_orders(Instance& instance, int id, vector<int> &chargement){
+    Order o = instance.orders[id];
+    vector<int> new_order();
+
+    for(vector<int>::iterator elt=o.product_type.begin(); elt<o.product_type.end(); elt++){
+        if (chargemant[(*elt)]>0){
+            chargement[(*elt)]--;
+        }else{
+            new_order.push_back((*elt));
+        }
+    }
+    instance.orders[id].product_type = new_order;
+
+}
 
 
-int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, int drone_number){
+
+int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, int drone_number, fstream &fichier ){
     
     int size = instance.products.size();
     
-    Case position = ord->position;
 
     int score = -1;
     int num_order = 0;
@@ -44,6 +58,8 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
     
     // parcours des ordres a traiter
     for(vector<Order>::iterator ord=(instance.orders).begin() ; ord < (instance.orders).end(); ord++) {
+
+        Case position = ord->position;
         
         int dist_d_w = 0, dist_w_o =0;
         
@@ -73,10 +89,8 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
                     
                     chargement_drone += obj->weight;
                     stock_fictif_embarque[obj->p] +=1;
-                    obj++;
                 }
-                
-                break;
+                obj++;
                 
                 // je prends le max d'objets dans le warehouse (disponibles et at capacite drone attention)
             }
@@ -109,7 +123,16 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
 //    vector<int> best_chargement_drone;
     
     // commentaire PRINT
-    
+    for(int i=0; i<size; i++){
+        if (best_chargement_drone[i]>0){
+            fichier <<drone_number<<" "<<"L"<<" "<<num_best_ws<<" "<<i<<" "<<best_chargement_drone[i]<<"\n";
+        }
+    }
+    for(int i=0; i<size; i++){
+        if (best_chargement_drone[i]>0){
+            fichier <<drone_number<<" "<<"D"<<" "<<num_order<<" "<<i<<" "<<best_chargement_drone[i]<<"\n";
+        }
+    }
     //mettre a jour stock warhouse
    
     for (int i = 0; i<size; i++) {
@@ -117,7 +140,7 @@ int choix_next_move(Instance& instance, int delta_temps, Case& drone_position, i
     }
     
      // commande en cours
-
+   update_orders(instance, num_order, best_chargement_drone);
     
     
     // update case drone
