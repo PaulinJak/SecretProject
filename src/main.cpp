@@ -17,35 +17,37 @@ int main(int argc, char* argv[])
         Instance instance;
         readInstance("instances/mother_of_all_warehouses.in", instance );
         int max_T = instance.T_horizon;
-
+        int n_drones = instance.n_drones;
         // Tant que des drones ont le tant de faire des commandes
-        int drone_actif = instance.n_drones;
+        int drone_actif = n_drones;
         // Initialise le vecteur temps des drones
-        vector<int>  drone_temps(instance.n_drones);
-        vector<Case> drone_position(instance.n_drones, Case(0,0));
+        vector<int>  drone_temps(n_drones);
+        vector<Case> drone_position(n_drones, Case(0,0));
 
         while(drone_actif>0){
             //On trouve le drone avec le temps le, plus petit
-            int drone_id;
+            int drone_id=-1;
             int temps_abs=max_T;
-            int i=0;
-            for(int t : drone_temps){
+            int t=0;
+            for(int i =0; i<n_drones; i++){
+                t = drone_temps.at(i);
                 if (t<temps_abs){
                     drone_id=i;
                     temps_abs=t;
                 }
-                i++;
             }
+            //on clacul le temps restant au drone
             int deltaT = max_T - temps_abs;
             //on appel la fonction de choix
-            //deltaT = choix_next_move(instance, deltaT, drone_position.at(i),i); 
-/*!!!!*/    deltaT =-1; //TEST A ENLEVER!!!
+            //deltaT = choix_next_move(instance, deltaT, drone_position.at(i),drone_id); 
+            //TODO ajouter fstream chez maud
+/*TODO*/    deltaT =-1; //TEST A ENLEVER!!!
             // si deltaT negatif, on retire le drone
             if (deltaT<0){
                 drone_actif--;
-                drone_temps.at(i) = max_T+1;
+                drone_temps.at(drone_id) = max_T+1;
             } else {
-                drone_temps.at(i) = max_T-deltaT;
+                drone_temps.at(drone_id) = max_T-deltaT;
             }
         }
         return 0;
